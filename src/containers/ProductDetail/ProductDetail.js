@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react'; // Added useContext import
 import { useParams, Link } from 'react-router-dom';
+import { SavedContext } from "../../context/SavedContext";
 
 const mockFurnitureData = [
   {
@@ -17,6 +18,7 @@ const mockFurnitureData = [
 const ProductDetail = () => {
   const { id } = useParams();
   const item = mockFurnitureData.find(item => item.id === parseInt(id));
+  const { addToSaved } = useContext(SavedContext);
 
   if (!item) {
     return (
@@ -28,6 +30,16 @@ const ProductDetail = () => {
       </div>
     );
   }
+
+  const handleSaveToFavorites = () => {
+    addToSaved({
+      id: item.id,
+      title: item.name,
+      image: item.image,
+      mod: item.mod,
+      type: item.type
+    });
+  };
 
   return (
     <div className="product-detail-container">
@@ -65,7 +77,9 @@ const ProductDetail = () => {
           </div>
           
           <div className="action-buttons">
-            <button className="minecraft-button primary">Save to Favorites</button>
+            <button className="minecraft-button primary" onClick={handleSaveToFavorites}>
+              Save to Favorites
+            </button>
             <button className="minecraft-button secondary">Get Building Inspiration</button>
           </div>
         </div>
