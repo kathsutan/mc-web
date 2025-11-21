@@ -1,66 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import ItemFrame from '../../components/ItemFrame/ItemFrame';
 import SearchFilter from '../../components/SearchFilter/SearchFilter';
-
-const mockFurnitureData = [
-  {
-    id: 1,
-    name: 'Modern Chair',
-    mod: 'MrCrayfish',
-    type: 'Chairs',
-    image: 'https://via.placeholder.com/200x200/4A90E2/FFFFFF?text=Modern+Chair',
-    description: 'A sleek modern chair perfect for contemporary builds.'
-  },
-  {
-    id: 2,
-    name: 'Oak Bookshelf',
-    mod: 'Bibliocraft',
-    type: 'Storage',
-    image: 'https://via.placeholder.com/200x200/8B4513/FFFFFF?text=Oak+Bookshelf',
-    description: 'Classic oak bookshelf for storing your enchanted books.'
-  },
-  {
-    id: 3,
-    name: 'Chandelier',
-    mod: 'Decocraft',
-    type: 'Lights',
-    image: 'https://via.placeholder.com/200x200/FFD700/FFFFFF?text=Chandelier',
-    description: 'Elegant chandelier to light up your grand hall.'
-  },
-  {
-    id: 4,
-    name: 'Coffee Table',
-    mod: 'MrCrayfish',
-    type: 'Tables',
-    image: 'https://via.placeholder.com/200x200/A0522D/FFFFFF?text=Coffee+Table',
-    description: 'Perfect for your living room setup.'
-  },
-  {
-    id: 5,
-    name: 'Vase',
-    mod: 'Decocraft',
-    type: 'Decoration',
-    image: 'https://via.placeholder.com/200x200/FF69B4/FFFFFF?text=Vase',
-    description: 'Decorative vase to brighten up any room.'
-  },
-  {
-    id: 6,
-    name: 'Cabinet',
-    mod: 'Bibliocraft',
-    type: 'Storage',
-    image: 'https://via.placeholder.com/200x200/654321/FFFFFF?text=Cabinet',
-    description: 'Spacious cabinet for all your storage needs.'
-  }
-];
+import { getPopularMods, searchMods } from '../../api/modsAPI';
 
 const Home = () => {
-  const [furniture, setFurniture] = useState(mockFurnitureData);
+  const [furniture, setFurniture] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedMod, setSelectedMod] = useState('All Mods');
   const [selectedType, setSelectedType] = useState('All Types');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let filtered = mockFurnitureData;
+    const fetchMods = async () => {
+      setLoading(true);
+      const modsData = await getPopularMods();
+      
+      // Convert mod data to furniture format
+      const furnitureData = modsData.map((mod, index) => ({
+        id: index + 1,
+        name: mod.name,
+        mod: mod.author,
+        type: getRandomType(),
+        image: mod.icon || 'https://via.placeholder.com/200x200/8B4513/FFFFFF?text=Mod+Icon',
+        description: mod.description || 'A popular Minecraft mod for furniture and decorations.',
+        modRequirements: `${mod.name} v1.0+`,
+        craftingRecipe: 'Various crafting recipes',
+        downloads: mod.downloads,
+        modUrl: mod.modUrl
+      }));
+      
+      setFurniture(furnitureData);
+      setLoading(false);
+    };
+
+    fetchMods();
+  }, []);
+
+  const getRandomType = () => {
+    const types = ['Chairs', 'Tables', 'Storage', 'Decoration', 'Lights', 'Furniture'];
+    return types[Math.floor(Math.random() * types.length)];
+  };
+
+  // Filter logic remains the same
+  useEffect(() => {
+    let filtered = furniture;
 
     if (searchTerm) {
       filtered = filtered.filter(item =>
@@ -78,7 +61,15 @@ const Home = () => {
     }
 
     setFurniture(filtered);
-  }, [searchTerm, selectedMod, selectedType]);
+  }, [searchTerm, selectedMod, selectedType, furniture]);
+
+  if (loading) {
+    return (
+      <div className="home-container">
+        <div className="loading">Loading mods...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">
