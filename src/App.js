@@ -4,15 +4,14 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./containers/Home/Home";
 import ProductDetail from "./containers/ProductDetail/ProductDetail";
-import Cart from "./containers/Cart/Cart";
-import Payment from "./containers/Payment/Payment";
-import PaymentSuccess from "./containers/Payment/PaymentSuccess";
+import Saved from "./containers/Saved/Saved";
+import Inspiration from "./containers/Inspiration/Inspiration";
 import "./App.css";
-import { CartProvider } from "./context/CartContext";
+import { SavedProvider } from "./context/SavedContext";
 
 function App() {
   return (
-    <CartProvider>
+    <SavedProvider> {/* Updated provider */}
       <Router>
         <div className="app-container">
           <Header />
@@ -20,15 +19,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/product/:id" element={<ProductDetail />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/saved" element={<Saved />} /> {/* Updated route */}
+              <Route path="/inspiration" element={<Inspiration />} />
             </Routes>
           </main>
           <Footer />
         </div>
       </Router>
-      </CartProvider>
+    </SavedProvider>
   );
 }
 

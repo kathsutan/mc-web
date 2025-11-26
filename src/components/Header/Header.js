@@ -1,27 +1,25 @@
 import { Link } from "react-router-dom";
-import "./Header.css";
 import { useContext } from "react";
-import { CartContext } from "../../context/CartContext";
+import { SavedContext } from "../../context/SavedContext";
 
 const Header = () => {
-
-    const {cartItems} = useContext(CartContext)
-    const cartCount = cartItems.reduce((sum,item)=>sum + item.quantity, 0);
+    const {savedItems} = useContext(SavedContext)
+    const savedCount = savedItems.reduce((sum,item)=>sum + item.quantity, 0);
 
   return (
-    <header className="header">
-      <Link to="/" className="logo">
-        🛒 ShopEase
-      </Link>
-      <nav className="nav-links">
-        <Link to="/">Home</Link>
-        <div className="cart-link">
-          <Link to="/cart">Cart</Link>
-          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-        </div>
-        
-        {/* <Link to="/payment">Payment</Link> */}
-      </nav>
+    <header className="minecraft-header">
+      <div className="header-container">
+        <Link to="/" className="logo">
+          <h1>Modded Minecraft Furniture</h1>
+        </Link>
+        <nav className="nav-menu">
+          <Link to="/" className="nav-link">Gallery</Link>
+          <Link to="/inspiration" className="nav-link">Inspiration</Link>
+          <div className="saved-link"> {/* Updated class */}
+            <Link to="/saved" className="nav-link">Saved ({savedCount})</Link> {/* Updated text */}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
