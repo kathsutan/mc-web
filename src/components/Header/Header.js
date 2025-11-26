@@ -3,8 +3,8 @@ import { useContext } from "react";
 import { SavedContext } from "../../context/SavedContext";
 
 const Header = () => {
-    const {savedItems} = useContext(SavedContext)
-    const savedCount = savedItems.reduce((sum,item)=>sum + item.quantity, 0);
+    // const {savedItems} = useContext(SavedContext)
+    // const savedCount = savedItems.reduce((sum,item)=>sum + item.quantity, 0);
 
   return (
     <header className="minecraft-header">
@@ -15,8 +15,8 @@ const Header = () => {
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Gallery</Link>
           <Link to="/inspiration" className="nav-link">Inspiration</Link>
-          <div className="saved-link"> {/* Updated class */}
-            <Link to="/saved" className="nav-link">Saved ({savedCount})</Link> {/* Updated text */}
+          <div className="saved-link">
+            <Link to="/saved" className="nav-link">Bookmarked</Link>
           </div>
         </nav>
       </div>

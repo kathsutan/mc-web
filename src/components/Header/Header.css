@@ -5,12 +5,12 @@
   background-color: #222;
   color: #fff;
   padding: 1rem 2rem;
+  font-family: "Courier New", Monaco, monospace
 }
 
 .logo {
   font-size: 1.5rem;
   color: white;
-  text-decoration: none
 }
 
 .nav-links a {
@@ -28,25 +28,4 @@
 nav {
   display: flex;
   align-items: center;
-}
-
-/* Cart link container */
-.cart-link {
-  position: relative;
-  display: inline-block;
-}
-
-/* Cart count badge */
-.cart-badge {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: #e63946;
-  color: white;
-  font-size: 0.7rem;
-  padding: 3px 6px;
-  border-radius: 50%;
-  font-weight: bold;
-  min-width: 18px;
-  text-align: center;
 }
