@@ -520,6 +520,9 @@ body {
 .saved-items {
   margin-top: 2rem;
 }
+.saved p {
+  color: #cacaca;
+}
 .saved-item {
   display: flex;
   gap: 20px;
