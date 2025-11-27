@@ -5,7 +5,6 @@ const Inspiration = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Replace with your actual YouTube API key
   const YOUTUBE_API_KEY = 'AIzaSyBaGMKWQn6cxyRicZ6k3e2cAKEG5SFqhPA';
 
   // Renamed from useMockVideos to getMockVideos

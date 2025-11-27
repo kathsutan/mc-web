@@ -15,9 +15,9 @@ const Header = () => {
         <nav className="nav-menu">
           <Link to="/" className="nav-link">Gallery</Link>
           <Link to="/inspiration" className="nav-link">Inspiration</Link>
-          <div className="saved-link">
+          {/* <div className="saved-link"> */}
             <Link to="/saved" className="nav-link">Bookmarked</Link>
-          </div>
+          {/* </div> */}
         </nav>
       </div>
     </header>

@@ -4,6 +4,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   background-color: #f5f5dc;
   color: #333;
+  background-image: url('images/spruce_stripped_log_back_by_blackspl_dgpfa48-pre.jpg');
 }
 
 .app-container {
@@ -19,7 +20,7 @@ body {
 
 /* Header Styles */
 .minecraft-header {
-  background-color: #96582d;
+  background-color: #724728;
   border-top: 4px solid #216535;
   padding: 1rem 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -43,7 +44,7 @@ body {
 
 .nav-menu {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -117,14 +118,14 @@ body {
 }
 
 .home-header h1 {
-  color: #333;
+  color: #fff;
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .home-header p {
-  color: #686868;
+  color: #cacaca;
   font-size: 1.2rem;
 }
 
@@ -224,6 +225,7 @@ body {
 }
 .minecraft-button.primary, .minecraft-button.secondary {
   background-color: #6E6E6E;
+  font-family: 'Courier New', Courier, monospace;
 }
 .minecraft-button:hover {
   transform: translateY(-2px);
@@ -259,9 +261,10 @@ body {
   gap: 1rem;
 }
 .minecraft-select {
+  margin-left: 2rem;
   padding: 0.7rem;
-  border: 3px solid #686868;
-  background-color: #686868;
+  border: 3px solid #acacac;
+  background-color: #acacac;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
@@ -341,7 +344,7 @@ body {
   border-radius: 4px;
 }
 .product-title {
-  color: #333;
+  color: #fff;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
@@ -356,18 +359,18 @@ body {
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: bold;
-    background-color: #686868;
+  background-color: #686868;
   color: white;
 }
 .product-description {
   margin-bottom: 2rem;
 }
 .product-description h3 {
-  color: #333;
+  color: #fff;
   margin-bottom: 1rem;
 }
 .product-description p {
-  color: #686868;
+  color: #cacaca;
   line-height: 1.6;
 }
 .product-details {
@@ -377,12 +380,12 @@ body {
   margin-bottom: 1.5rem;
 }
 .detail-group h4 {
-  color: #333;
+  color: #fff;
   margin-bottom: 0.5rem;
 }
 .detail-group p {
-  color: #686868;
-  background-color: #F5F5DC;
+  color: #cacaca;
+  background-color: #a25016;
   padding: 1rem;
   border-radius: 4px;
   border-left: 4px solid #8B4513;
@@ -414,12 +417,12 @@ body {
   margin-bottom: 3rem;
 }
 .inspiration-header h1 {
-  color: #333;
+  color: #fff;
   font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 .inspiration-header p {
-  color: #686868;
+  color: #cacaca;
   font-size: 1.2rem;
 }
 .inspiration-search {
@@ -439,7 +442,7 @@ body {
 }
 
 .videos-grid h2 {
-  color: #333;
+  color: #fff;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -479,11 +482,10 @@ body {
 }
 
 .ai-suggestions h2 {
-  color: #333;
+  color: #cacaca;
   margin-bottom: 2rem;
   text-align: center;
 }
-
 .suggestion-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -512,15 +514,12 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
-
 .saved.empty {
   text-align: center;
 }
-
 .saved-items {
   margin-top: 2rem;
 }
-
 .saved-item {
   display: flex;
   gap: 20px;
@@ -532,26 +531,22 @@ body {
   border-radius: 8px;
   border: 2px solid #8B4513;
 }
-
 .saved-item img {
   width: 120px;
   height: 180px;
   object-fit: cover;
   border-radius: 6px;
 }
-
 .details {
   flex: 1;
 }
-
 .details h3 {
   margin: 0;
   font-size: 1.2rem;
   color: #333;
 }
-
 .mod-info, .type-info {
-  color: #666;
+  color: #686868;
   margin: 4px 0;
   font-size: 0.9rem;
 }
@@ -562,7 +557,6 @@ body {
   gap: 10px;
   margin: 10px 0;
 }
-
 .qty-controls button {
   width: 30px;
   height: 30px;
@@ -573,11 +567,9 @@ body {
   font-size: 1.2rem;
   border-radius: 4px;
 }
-
 .qty-controls button:hover {
   background-color: #A0522D;
 }
-
 .qty-controls span {
   font-weight: bold;
 }
@@ -591,7 +583,6 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .remove-btn:hover {
   background-color: #a71d2a;
 }
@@ -600,18 +591,21 @@ body {
   margin-top: 30px;
   text-align: center;
   padding: 1rem;
-  background: #F5F5DC;
-  border-radius: 8px;
-  border: 2px solid #8B4513;
+  border-radius: 4px;
+  background-image: url(images/sign.png);
+  width: 48.6%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
+.saved h2 {
+  color: #fff;
+}
 .saved-summary h3 {
-  color: #333;
+  color: #fff;
   margin-bottom: 1rem;
 }
-
 .saved-summary p {
-  color: #686868;
+  color: #cacaca;
   font-style: italic;
 }
 
