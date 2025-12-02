@@ -1,37 +1,51 @@
-import React from 'react';
+import React from "react";
+import './SearchFilter.css'
 
-const SearchFilter = ({ searchTerm, onSearchChange, selectedMod, onModFilterChange, selectedType, onTypeFilterChange }) => {
-  const mods = ['All Mods', 'Decocraft', 'MrCrayfish', 'Bibliocraft', 'Chisels & Bits'];
-  const furnitureTypes = ['All Types', 'Chairs', 'Tables', 'Storage', 'Decoration', 'Lights'];
+const SearchFilter = ({
+  searchTerm,
+  onSearchChange,
+  selectedType,
+  onTypeFilterChange,
+}) => {
+  const furnitureTypes = [
+    "All Types",
+    "Chairs",
+    "Tables",
+    "Storage",
+    "Decoration",
+    "Lights",
+  ];
+
+  const handleSearchChange = (e) => {
+    onSearchChange(e.target.value);
+  };
+
+  const handleTypeChange = (e) => {
+    onTypeFilterChange(e.target.value);
+  };
 
   return (
     <div className="search-filter-container">
       <div className="search-box">
         <input
           type="text"
-          placeholder="Search furniture items..."
+          placeholder="Search furniture items (e.g. chair, table, kitchen)..."
           value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={handleSearchChange}
           className="minecraft-input"
         />
       </div>
+
       <div className="filter-boxes">
-        <select 
-          value={selectedMod} 
-          onChange={(e) => onModFilterChange(e.target.value)}
+        <select
+          value={selectedType}
+          onChange={handleTypeChange}
           className="minecraft-select"
         >
-          {mods.map(mod => (
-            <option key={mod} value={mod}>{mod}</option>
-          ))}
-        </select>
-        <select 
-          value={selectedType} 
-          onChange={(e) => onTypeFilterChange(e.target.value)}
-          className="minecraft-select"
-        >
-          {furnitureTypes.map(type => (
-            <option key={type} value={type}>{type}</option>
+          {furnitureTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
           ))}
         </select>
       </div>

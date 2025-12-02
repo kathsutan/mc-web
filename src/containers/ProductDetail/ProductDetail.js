@@ -1,31 +1,23 @@
-import React, { useContext } from 'react'; // Added useContext import
-import { useParams, Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SavedContext } from "../../context/SavedContext";
-
-const mockFurnitureData = [
-  {
-    id: 1,
-    name: 'Modern Chair',
-    mod: 'MrCrayfish Furniture Mod',
-    type: 'Chairs',
-    image: 'https://via.placeholder.com/400x400/4A90E2/FFFFFF?text=Modern+Chair',
-    description: 'A sleek modern chair perfect for contemporary builds. This chair features clean lines and a comfortable design that will enhance any modern Minecraft home.',
-    modRequirements: 'MrCrayfish Furniture Mod v7.0.0+',
-    craftingRecipe: '6x Oak Planks, 2x Iron Ingot'
-  }
-];
+import './ProductDetail.css'
 
 const ProductDetail = () => {
-  const { id } = useParams();
-  const item = mockFurnitureData.find(item => item.id === parseInt(id));
+  const location = useLocation();
+  const navigate = useNavigate();
   const { addToSaved } = useContext(SavedContext);
+  const item = location.state?.item;
 
   if (!item) {
     return (
       <div className="product-detail-container">
+        <button className="back-button" onClick={() => navigate("/")}>
+          ← Back to Gallery
+        </button>
         <div className="error-message">
           <h2>Item not found</h2>
-          <Link to="/" className="minecraft-button">Back to Gallery</Link>
+          <p>Try going back to the gallery and selecting an item again.</p>
         </div>
       </div>
     );
@@ -37,50 +29,58 @@ const ProductDetail = () => {
       title: item.name,
       image: item.image,
       mod: item.mod,
-      type: item.type
+      type: item.type,
     });
   };
 
   return (
     <div className="product-detail-container">
-      <Link to="/" className="back-button">← Back to Gallery</Link>
-      
+      <button className="back-button" onClick={() => navigate(-1)}>
+        ← Back to Gallery
+      </button>
+
       <div className="product-detail">
         <div className="product-image-section">
           <div className="large-item-frame">
             <img src={item.image} alt={item.name} className="product-image" />
           </div>
         </div>
-        
+
         <div className="product-info-section">
           <h1 className="product-title">{item.name}</h1>
+
           <div className="product-meta">
             <span className="mod-badge">{item.mod}</span>
-            <span className="type-badge">{item.type}</span>
           </div>
-          
+
           <div className="product-description">
             <h3>Description</h3>
-            <p>{item.description}</p>
+            <p>
+              {item.description ||
+                "This mod adds various furniture and decorative blocks for your builds."}
+            </p>
           </div>
-          
+
           <div className="product-details">
             <div className="detail-group">
-              <h4>Mod Requirements</h4>
-              <p>{item.modRequirements}</p>
+              <h4>Downloads</h4>
+              <p>{item.downloads?.toLocaleString() ?? "Unknown"}</p>
             </div>
-            
+
             <div className="detail-group">
-              <h4>Crafting Recipe</h4>
-              <p>{item.craftingRecipe}</p>
+              <h4>Mod Page</h4>
+              <p>
+                <a href={item.modUrl} target="_blank" rel="noopener noreferrer">
+                  View on Modrinth
+                </a>
+              </p>
             </div>
           </div>
-          
+
           <div className="action-buttons">
             <button className="minecraft-button primary" onClick={handleSaveToFavorites}>
               Save to Favorites
             </button>
-            <button className="minecraft-button secondary">Get Building Inspiration</button>
           </div>
         </div>
       </div>

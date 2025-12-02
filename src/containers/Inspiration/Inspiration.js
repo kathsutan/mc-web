@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
+import './Inspiration.css'
 
 const Inspiration = () => {
   const [searchPrompt, setSearchPrompt] = useState('');
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const YOUTUBE_API_KEY = 'AIzaSyBaGMKWQn6cxyRicZ6k3e2cAKEG5SFqhPA';
 
-  // Renamed from useMockVideos to getMockVideos
   const getMockVideos = () => {
     const mockVideos = [
       {
@@ -42,35 +43,39 @@ const Inspiration = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=9&q=${encodeURIComponent(query + ' minecraft build')}&type=video&key=${YOUTUBE_API_KEY}`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=9&q=${encodeURIComponent(
+          query + ' minecraft build'
+        )}&type=video&key=${YOUTUBE_API_KEY}`
       );
       const data = await response.json();
-      
+
       if (data.items) {
         const videoData = data.items.map(item => ({
           id: item.id.videoId,
           title: item.snippet.title,
           thumbnail: item.snippet.thumbnails.medium.url,
           channel: item.snippet.channelTitle,
-          views: 'N/A', // You'd need another API call for view counts
           videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`
         }));
         setVideos(videoData);
       }
     } catch (error) {
       console.error('Error fetching YouTube videos:', error);
-      // Fallback to mock data if API fails
-      getMockVideos(); // Fixed: changed from useMockVideos to getMockVideos
+      getMockVideos();
     }
     setLoading(false);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
+
     if (searchPrompt.trim()) {
+      setHasSearched(true);          // user search → hide AI suggestions
       searchYouTubeVideos(searchPrompt);
     } else {
-      getMockVideos(); // Fixed: changed from useMockVideos to getMockVideos
+      // no search prompt → show AI suggestions, clear videos
+      setHasSearched(false);
+      setVideos([]);
     }
   };
 
@@ -105,12 +110,15 @@ const Inspiration = () => {
           <h2>Related Build Videos</h2>
           <div className="videos-container">
             {videos.map(video => (
-              <div key={video.id} className="video-card" onClick={() => openVideo(video.videoUrl)}>
+              <div
+                key={video.id}
+                className="video-card"
+                onClick={() => openVideo(video.videoUrl)}
+              >
                 <img src={video.thumbnail} alt={video.title} className="video-thumbnail" />
                 <div className="video-info">
                   <h3 className="video-title">{video.title}</h3>
                   <p className="video-channel">{video.channel}</p>
-                  <p className="video-views">{video.views} views</p>
                 </div>
               </div>
             ))}
@@ -118,23 +126,31 @@ const Inspiration = () => {
         </div>
       )}
 
-      <div className="ai-suggestions">
-        <h2>AI Design Suggestions</h2>
-        <div className="suggestion-cards">
-          <div className="suggestion-card">
-            <h3>Modern Villa</h3>
-            <p>Use MrCrayfish modern furniture set with clean lines and neutral colors. Incorporate large windows and open spaces.</p>
-          </div>
-          <div className="suggestion-card">
-            <h3>Medieval Castle</h3>
-            <p>Combine Decocraft decorative items with Bibliocraft storage. Use stone textures and warm lighting.</p>
-          </div>
-          <div className="suggestion-card">
-            <h3>Japanese Garden House</h3>
-            <p>Feature minimalist furniture from MrCrayfish mod. Use bamboo and cherry blossom decorations.</p>
+      {!hasSearched && ( // suggestions
+        <div className="ai-suggestions">
+          <h2>Search Suggestions</h2>
+          <div className="suggestion-cards">
+            <div className="suggestion-card">
+              <h3>Starter Houses</h3>
+              <p>
+                Find simple survival bases, dirt hut upgrades, or cute cottage starter bases.
+              </p>
+            </div>
+            <div className="suggestion-card">
+              <h3>Medieval Castle</h3>
+              <p>
+                Combine various mods with medieval castles, keeps, watchtowers, blacksmiths, and even taverns.
+              </p>
+            </div>
+            <div className="suggestion-card">
+              <h3>Japanese Garden House</h3>
+              <p>
+                Build Zen gardens or cherry blossom houses with the combination of multiple mods.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

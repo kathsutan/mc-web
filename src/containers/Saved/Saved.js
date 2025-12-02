@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { SavedContext } from "../../context/SavedContext";
 import { Link } from "react-router-dom";
+import './Saved.css'
 
 const Saved = () => {
-  const { savedItems, increaseQty, decreaseQty, removeFromSaved } = useContext(SavedContext);
+  const { savedItems, removeFromSaved } = useContext(SavedContext);
 
-  if (savedItems.length === 0) {
+  if (!savedItems || savedItems.length === 0) {
     return (
       <div className="saved empty">
-        <h2>Your Saved Collection is Empty</h2>
-        <p>Start exploring the gallery and save your favorite furniture items for inspiration!</p>
+        <h2>Your Saved Mods</h2>
+        <p>Start exploring the gallery and save your favorite furniture mods!</p>
         <Link to="/" className="btn back-btn">
           Browse Gallery
         </Link>
@@ -19,37 +20,35 @@ const Saved = () => {
 
   return (
     <div className="saved">
-      <h2>Your Saved Furniture Collection</h2>
+      <h2>Your Saved Mods</h2>
 
       <div className="saved-items">
         {savedItems.map((item) => (
           <div className="saved-item" key={item.id}>
-            <img src={item.image} alt={item.title} />
-            <div className="details">
-              <h3>{item.title}</h3>
-              <p className="mod-info">From: {item.mod || "Various Mods"}</p>
-              <p className="type-info">Type: {item.type || "Furniture"}</p>
-
-              <div className="qty-controls">
-                <button onClick={() => decreaseQty(item.id)}>-</button>
-                <span>Quantity: {item.quantity}</span>
-                <button onClick={() => increaseQty(item.id)}>+</button>
-              </div>
-
-              <button
-                className="remove-btn"
-                onClick={() => removeFromSaved(item.id)}
-              >
-                Remove from Saved
-              </button>
+            <div className="saved-image-frame">
+              <img
+                src={item.image}
+                alt={item.title || item.name}
+                className="saved-img"
+              />
             </div>
+
+            <div className="saved-details">
+              <h3>{item.title || item.name}</h3>
+              {item.mod && <p className="mod-info">From: {item.mod}</p>}
+              {item.type && <p className="type-info">Type: {item.type}</p>}
+            </div>
+
+            <button className="remove-btn" onClick={() => removeFromSaved(item.id)}>
+              🗑️
+            </button>
           </div>
         ))}
       </div>
 
       <div className="saved-summary">
-        <h3>Total Saved Items: {savedItems.reduce((sum, item) => sum + item.quantity, 0)}</h3>
-        <p>Use these saved items as inspiration for your next Minecraft build!</p>
+        <h3>{savedItems.length} mod(s) saved</h3>
+        <p>Use this page as a simple bookmark list for your favorite furniture mods.</p>
       </div>
     </div>
   );

@@ -1,0 +1,36 @@
+.search-filter-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.search-box {
+  flex: 1;
+  min-width: 300px;
+}
+.minecraft-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 3px solid #686868;
+  background-color: #acacac;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Courier New', Courier, monospace;
+}
+.filter-boxes {
+  display: flex;
+  gap: 1rem;
+}
+.minecraft-select {
+  margin-left: 2rem;
+  padding: 0.7rem;
+  border: 3px solid #acacac;
+  background-color: #acacac;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}

@@ -1,7 +1,19 @@
-.footer {
-  background-color: #222;
-  color: #fff;
+.minecraft-footer {
+  background-color: #8B4513;
+  border-top: 4px solid #654321;
+  padding: 1rem 0;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+  padding: 0 2rem;
+}
+
+.footer-container p {
+  color: #F5F5F5;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
